@@ -9,11 +9,10 @@
 - Create user response dto {8885d45f33f0de7a74761c86f65ffccecb890cad}
 - Create user service {f8aae6d9bba9c381da25c429d7c6d4a335790c52}
 - Create security config {01e4a37099f03404e474f99985e7d44196bed2f7}
+- Create user controller {8248bcf7dd69401c13cc8d2e3812bb5c8b98d939}
+- Create auth controller {d5fb4ca3d3d72ff5f98385ba821cf480578dd6b0}
 
 ## IN-PROGRESS
-
-- Create user controller
-- Create auth controller
 
 ## TODO
 - Create a registration page
