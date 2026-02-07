@@ -3,9 +3,9 @@
 ## DONE
 - Create user entity {d634a061106d5b5024de2c201f526ef2f89e8e10}
 - Setup connection with MySQL (temp connection only due to old jdk) {a51fd486492de27f700005fffabaef96fd65e133}
+- Create user repository {e8f90e091ac772ff2b777a726440341acd56d9e6}
 
 ## IN-PROGRESS
-- Create user repository
 - Create user service
 - Create user controller
 - Create auth controller
