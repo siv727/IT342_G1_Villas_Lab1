@@ -7,9 +7,10 @@
 - Create registration request dto {68c03088bfa34575d9704ce749989968919d7fa0}
 - Create login request dto {c3d0f2b43535a87c36e8328037b631b1e9a3ebc2}
 - Create user response dto {8885d45f33f0de7a74761c86f65ffccecb890cad}
+- Create user service {f8aae6d9bba9c381da25c429d7c6d4a335790c52}
 
 ## IN-PROGRESS
-- Create user service
+
 - Create user controller
 - Create auth controller
 
