@@ -6,9 +6,9 @@
 - Create user repository {e8f90e091ac772ff2b777a726440341acd56d9e6}
 - Create registration request dto {68c03088bfa34575d9704ce749989968919d7fa0}
 - Create login request dto {c3d0f2b43535a87c36e8328037b631b1e9a3ebc2}
+- Create user response dto {8885d45f33f0de7a74761c86f65ffccecb890cad}
 
 ## IN-PROGRESS
-- Create user response dto
 - Create user service
 - Create user controller
 - Create auth controller
