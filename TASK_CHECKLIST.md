@@ -1,10 +1,14 @@
 # Task Checklist
 
 ## DONE
-- (No tasks completed yet)
+- Create user entity
 
 ## IN-PROGRESS
-- (No tasks in progress)
+- Setup connection with MySQL
+- Create user repository
+- Create user service
+- Create user controller
+- Create auth controller
 
 ## TODO
 - Create a registration page
@@ -12,12 +16,7 @@
 - Create a login page
 - Create a Profile Page
 - Create logout button
-- Create user entity
 - Create security config
-- Create user repository
-- Create user service
-- Create user controller
-- Create auth controller
 - Create custom user details service
 - Create custom user details
 - Create Registration request dto
