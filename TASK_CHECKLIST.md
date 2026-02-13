@@ -31,5 +31,3 @@
 - Create a login page
 - Create a Profile Page
 - Create logout button
-- Create custom user details service
-- Create custom user details
