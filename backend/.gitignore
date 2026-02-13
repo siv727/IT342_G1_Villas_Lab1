@@ -36,8 +36,8 @@ build/
 .mvn/
 
 ### Files sometimes added by IDEA module
-backend/src/main/resources/application.properties
-/src/main/resources/application.properties
+backend/src/main/java/com/example/backend/resources/application.properties
+/src/main/java/com/example/backend/resources/application.properties
 
 ### back/.idea/.gitignore entries (shelf and workspace)
 # These are covered by .idea/ above but left here for clarity
