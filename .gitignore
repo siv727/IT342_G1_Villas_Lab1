@@ -1,0 +1,52 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Maven wrapper and build
+.mvn/
+
+### Files sometimes added by IDEA module
+backend/src/main/java/com/example/backend/resources/application.properties
+/src/main/java/com/example/backend/resources/application.properties
+*.properties
+
+### back/.idea/.gitignore entries (shelf and workspace)
+# These are covered by .idea/ above but left here for clarity
+/shelf/
+/workspace.xml
+
+### Common / Repo-wide
+coverage/
+*.lcov
+*.log
+.env
