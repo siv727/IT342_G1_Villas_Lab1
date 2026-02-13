@@ -35,7 +35,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return new LoginResponse(jwtService.generateToken(user.getEmail()));
+        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
     }
 
     public LoginResponse login(LoginRequest request) {
@@ -46,7 +46,7 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return new LoginResponse(jwtService.generateToken(user.getEmail()));
+        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
     }
 
     public void logout() {
