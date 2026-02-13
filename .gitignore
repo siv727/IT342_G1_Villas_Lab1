@@ -39,6 +39,7 @@ build/
 backend/src/main/resources/application.properties
 /src/main/resources/application.properties
 *.properties
+**/application.properties
 
 ### back/.idea/.gitignore entries (shelf and workspace)
 # These are covered by .idea/ above but left here for clarity
