@@ -12,7 +12,7 @@ import com.example.backend.dto.UserResponse;
 import com.example.backend.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
