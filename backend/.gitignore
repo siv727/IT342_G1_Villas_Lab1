@@ -38,6 +38,7 @@ build/
 ### Files sometimes added by IDEA module
 backend/src/main/java/com/example/backend/resources/application.properties
 /src/main/java/com/example/backend/resources/application.properties
+*.properties
 
 ### back/.idea/.gitignore entries (shelf and workspace)
 # These are covered by .idea/ above but left here for clarity
