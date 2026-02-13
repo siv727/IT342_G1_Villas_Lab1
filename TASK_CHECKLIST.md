@@ -23,11 +23,13 @@
 - Fix auth controller to relay proper responses {73b3fdc6bc694ca1d3b031a6d4d20d47f0d84962}
 
 ## IN-PROGRESS
-
-
-## TODO
 - Create a registration page
 - Create a auth form component
 - Create a login page
 - Create a Profile Page
 - Create logout button
+
+## TODO
+- API connection for auth
+- API connection for profile functions
+- Proper clear for token after logout
