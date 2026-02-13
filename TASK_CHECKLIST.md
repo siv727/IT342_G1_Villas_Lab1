@@ -24,21 +24,19 @@
 - Create Axios client with base URL and token interceptor {f0a149d43cdce513cea0923601484e5228203f3d}
 - Create authentication API (login, register, logout) {8849bc9dc1b6961fe65a82d038a41e63f1686b52}
 - Create profile API (get user, update user) {0e701bef23fb2293a8aebc7cb78d7e396e434c1a}
+- Create UI components with orange theme (Button, Input, Label, Card, Avatar) {096ee2731238f52a9751dc7c179c1f81722154bd}
+- Create AuthForm component (reusable for login and register) {75a0717041c5eefee6351c958675dfffc4033a30}
+- Create LogoutButton component {1487fc481e088a8490b487791c6e66698ded8214}
+- Remove unncessary styling in app and index {011cc15b92033f5b00e02675dabe1aa29cd412c7}
 
 ## IN-PROGRESS
-- Create Button component with orange theme
-- Create Input component with orange theme
-- Create Label component with orange theme
-- Create Card component with orange theme
-- Create Avatar component with orange theme
-- Create AuthForm component (reusable for login and register)
-- Create LogoutButton component
-
-## TODO
 - Create Login page
 - Create Registration page
 - Create Profile Display page
 - Create Profile Update page
 - Setup routing (login, register, profile, profile update)
+
+## TODO
+- Update Docs in regards to changes in auth architecture
 - Blacklist/Refresh Tokens
 - Input Sanitization
