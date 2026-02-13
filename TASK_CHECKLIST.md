@@ -21,15 +21,24 @@
 - Refactored SecurityConfig to cater to JWT {99f247059923330db35371c384a8c49c98900c78}
 - Create login response dto {ec894b6a08b21b2cebce046ed206e952f3bd8810}
 - Fix auth controller to relay proper responses {73b3fdc6bc694ca1d3b031a6d4d20d47f0d84962}
+- Create Axios client with base URL and token interceptor {f0a149d43cdce513cea0923601484e5228203f3d}
+- Create authentication API (login, register, logout) {8849bc9dc1b6961fe65a82d038a41e63f1686b52}
+- Create profile API (get user, update user) {0e701bef23fb2293a8aebc7cb78d7e396e434c1a}
 
 ## IN-PROGRESS
-- Create a registration page
-- Create a auth form component
-- Create a login page
-- Create a Profile Page
-- Create logout button
+- Create Button component with orange theme
+- Create Input component with orange theme
+- Create Label component with orange theme
+- Create Card component with orange theme
+- Create Avatar component with orange theme
+- Create AuthForm component (reusable for login and register)
+- Create LogoutButton component
 
 ## TODO
-- API connection for auth
-- API connection for profile functions
-- Proper clear for token after logout
+- Create Login page
+- Create Registration page
+- Create Profile Display page
+- Create Profile Update page
+- Setup routing (login, register, profile, profile update)
+- Blacklist/Refresh Tokens
+- Input Sanitization
