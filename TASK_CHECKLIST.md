@@ -20,9 +20,10 @@
 - Create JWT filter {3baab88c1b1799573602b216b90e44b7f3476b44}
 - Refactored SecurityConfig to cater to JWT {99f247059923330db35371c384a8c49c98900c78}
 - Create login response dto {ec894b6a08b21b2cebce046ed206e952f3bd8810}
+- Fix auth controller to relay proper responses {73b3fdc6bc694ca1d3b031a6d4d20d47f0d84962}
 
 ## IN-PROGRESS
-- Fix auth controller to relay proper responses
+
 
 ## TODO
 - Create a registration page
