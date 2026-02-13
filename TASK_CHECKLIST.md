@@ -28,15 +28,15 @@
 - Create AuthForm component (reusable for login and register) {75a0717041c5eefee6351c958675dfffc4033a30}
 - Create LogoutButton component {1487fc481e088a8490b487791c6e66698ded8214}
 - Remove unncessary styling in app and index {011cc15b92033f5b00e02675dabe1aa29cd412c7}
+- Create Login page {ec9671e68c5ccc60446c293e8e835d7f426bef79}
+- Create Registration page {a2f1259202650bcff66603ea4cb2b0c980e39687}
+- Create Profile Display page {e983aa03bd96dcef3eaa188f8cf49951888632ca}
+- Create Profile Update page {3776d82534e8e0f80b2aac857afa2a3441ee2305}
+- Setup routing (login, register, profile, profile update) {bbcd684f43b62f536c4a4c185ef9af8878755fac}
 
 ## IN-PROGRESS
-- Create Login page
-- Create Registration page
-- Create Profile Display page
-- Create Profile Update page
-- Setup routing (login, register, profile, profile update)
+- Update Docs in regards to changes in auth architecture
 
 ## TODO
-- Update Docs in regards to changes in auth architecture
 - Blacklist/Refresh Tokens
 - Input Sanitization
