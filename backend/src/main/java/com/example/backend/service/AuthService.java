@@ -5,8 +5,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.dto.LoginRequest;
+import com.example.backend.dto.LoginResponse;
 import com.example.backend.dto.RegistrationRequest;
-import com.example.backend.dto.UserResponse;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 
@@ -22,7 +22,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
-    public void register(RegistrationRequest request) {
+    public LoginResponse register(RegistrationRequest request) {
         if (userRepository.existsByEmail(request.email())) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -34,9 +34,11 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.password()));
 
         userRepository.save(user);
+
+        return new LoginResponse(jwtService.generateToken(user.getEmail()));
     }
 
-    public UserResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
@@ -44,13 +46,7 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return new UserResponse(
-            user.getId(),
-            user.getFirstname(),
-            user.getLastname(),
-            user.getEmail(),
-            user.getProfilePicture()
-        );
+        return new LoginResponse(jwtService.generateToken(user.getEmail()));
     }
 
     public void logout() {

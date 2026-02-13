@@ -14,7 +14,6 @@ import com.example.backend.dto.RegistrationRequest;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.service.AuthService;
 import com.example.backend.service.JwtService;
-import com.example.backend.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,11 +21,6 @@ public class AuthController {
 
     @Autowired
     private final AuthService authService;
-    
-    // private final AuthenticationManager authenticationManager;
-    // private final UserRepository userRepository;
-    // private final PasswordEncoder passwordEncoder;
-    // private final JwtService jwtService;
 
     public AuthController(AuthService authService, AuthenticationManager authenticationManager, UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.authService = authService;
@@ -35,8 +29,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegistrationRequest req) {
         try {
-            authService.register(req);
-            return ResponseEntity.ok("User registered successfully");
+            return ResponseEntity.ok(authService.register(req));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
