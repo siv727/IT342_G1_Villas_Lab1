@@ -38,5 +38,8 @@
 - Update Docs in regards to changes in auth architecture
 
 ## TODO
-- Blacklist/Refresh Tokens
-- Input Sanitization
+- Blacklist Tokens
+- Fix Display Message when JWT token is manipulated
+- Fix must logout when JWT token is manipulated
+- User Profile Field Input Sanitization
+- User Authentication Field Input Sanitization
