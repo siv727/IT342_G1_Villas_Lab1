@@ -33,8 +33,33 @@
 - Create Profile Display page {e983aa03bd96dcef3eaa188f8cf49951888632ca}
 - Create Profile Update page {3776d82534e8e0f80b2aac857afa2a3441ee2305}
 - Setup routing (login, register, profile, profile update) {bbcd684f43b62f536c4a4c185ef9af8878755fac}
+- Make custom mobile icons {f601d148c25ad0703bfa5bf518b4b35ffecf6bf0}
+- Make input field component layout {e46198888153caad9828cf8d9239db78691509b8}
+- Make logout button component layout {64cf24e4622d01a1f6ae7ff89cbc2918435417eb}
+- Make profile display field component layout {a88e61d2f4383a8923b590a8540f7cc12cea6f7d}
+- Input Field Component Functionality {8f48e959273c316036624cbf1ebed2264b6b0cf8}
+- Logout Button Functionality {5cbf863d5190fbda0f3481a656264a2363e4a9dc}
+- Profile Functionality {ece21cde27c6f83baa17086f32cd209ce8fbbaa9}
+- Login Activity layout {80792ccef0cd1dc57152c6a29697e6310ad3a6e2}
+- Profile Activity layout {d2f1435edef53b80e9c98af5fa5c949aceaa8998}
+- Profile Update Activity layout {d56f5fe68269a47b8f4609a784fb761ffd4801b1}
+- Register Activity layout {c2dcf2c68a2bb716cdf0a5f1cb95d05f4a39f3ca}
+- Login Request dto {a127f8fdbc10d73dc2cb4125b34b0c9d5749c0aa}
+- Login Response dto {24a38757c2de1f147d6f7310acf0090b7678981b}
+- Registration Request dto {77056c2c420e4a19827952267eb23511b6a7d492}
+- User Response dto {65887b44220c809ec4cd337dc81282bf3fdca2d0}
+- Token Manager {6c78e46fc20119b4a4be155a2a776655f36720f8}
+- RetroFit Client {370875c7fc39fd09a776acffd69cd45ae651a794}
+- Authentication Services {9ffaf661351846c94647e3721c98a4e005ed7cee}
+- Api Endpoints {e3621571fdc61e9aa484181daeaa758dcb1bb2c0}
+- Login Activity {f5ca07ef1dd3c488a7ea2258b8da62ef3efb7f29}
+- Profile Activity {744af84c8108ef10f97786555a90a04c7b191a4c}
+- Profile Update Activity {85c59f76f106df2932af27fe9680306662f7121a}
+- Register Activity {d5e913527e472424ebebce29caca429eacfc5fe2}
 
 ## IN-PROGRESS
+- Exception Handling
+- Error Message Handling
 - Update Docs in regards to changes in auth architecture
 
 ## TODO

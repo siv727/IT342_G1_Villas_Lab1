@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom attributes for AppInputField reusable component -->
+    <declare-styleable name="AppInputField">
+        <attr name="fieldHint" format="string" />
+        <attr name="fieldInputType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="email" value="1" />
+            <enum name="password" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

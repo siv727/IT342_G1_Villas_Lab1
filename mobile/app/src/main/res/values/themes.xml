@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Ura" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/orange_primary</item>
+        <item name="colorPrimaryVariant">@color/orange_dark</item>
+        <item name="colorSecondary">@color/orange_secondary</item>
+        <item name="android:statusBarColor">@color/orange_primary</item>
+        <item name="android:windowBackground">@color/orange_bg</item>
+    </style>
+</resources>
