@@ -52,12 +52,14 @@
 - RetroFit Client {370875c7fc39fd09a776acffd69cd45ae651a794}
 - Authentication Services {9ffaf661351846c94647e3721c98a4e005ed7cee}
 - Api Endpoints {e3621571fdc61e9aa484181daeaa758dcb1bb2c0}
+- Login Activity {f5ca07ef1dd3c488a7ea2258b8da62ef3efb7f29}
+- Profile Activity {744af84c8108ef10f97786555a90a04c7b191a4c}
+- Profile Update Activity {85c59f76f106df2932af27fe9680306662f7121a}
+- Register Activity {d5e913527e472424ebebce29caca429eacfc5fe2}
 
 ## IN-PROGRESS
-- Login Activity
-- Profile Activity
-- Profile Update Activity
-- Register Activity
+- Exception Handling
+- Error Message Handling
 - Update Docs in regards to changes in auth architecture
 
 ## TODO
