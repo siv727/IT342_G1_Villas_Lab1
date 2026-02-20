@@ -44,19 +44,19 @@
 - Profile Activity layout {d2f1435edef53b80e9c98af5fa5c949aceaa8998}
 - Profile Update Activity layout {d56f5fe68269a47b8f4609a784fb761ffd4801b1}
 - Register Activity layout {c2dcf2c68a2bb716cdf0a5f1cb95d05f4a39f3ca}
+- Login Request dto {a127f8fdbc10d73dc2cb4125b34b0c9d5749c0aa}
+- Login Response dto {24a38757c2de1f147d6f7310acf0090b7678981b}
+- Registration Request dto {77056c2c420e4a19827952267eb23511b6a7d492}
+- User Response dto {65887b44220c809ec4cd337dc81282bf3fdca2d0}
 
 ## IN-PROGRESS
-- Login Request dto
-- Login Response dto
-- Registration Request dto
-- User Response dto
-- Update Docs in regards to changes in auth architecture
-
-## TODO
 - Token Manager
 - RetroFit Client
 - Authentication Services
 - Api Endpoints
+- Update Docs in regards to changes in auth architecture
+
+## TODO
 - Login Activity
 - Profile Activity
 - Profile Update Activity
