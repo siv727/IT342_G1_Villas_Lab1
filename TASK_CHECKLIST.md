@@ -48,18 +48,18 @@
 - Login Response dto {24a38757c2de1f147d6f7310acf0090b7678981b}
 - Registration Request dto {77056c2c420e4a19827952267eb23511b6a7d492}
 - User Response dto {65887b44220c809ec4cd337dc81282bf3fdca2d0}
+- Token Manager {6c78e46fc20119b4a4be155a2a776655f36720f8}
+- RetroFit Client {370875c7fc39fd09a776acffd69cd45ae651a794}
+- Authentication Services {9ffaf661351846c94647e3721c98a4e005ed7cee}
+- Api Endpoints {e3621571fdc61e9aa484181daeaa758dcb1bb2c0}
 
 ## IN-PROGRESS
-- Token Manager
-- RetroFit Client
-- Authentication Services
-- Api Endpoints
-- Update Docs in regards to changes in auth architecture
-
-## TODO
 - Login Activity
 - Profile Activity
 - Profile Update Activity
 - Register Activity
+- Update Docs in regards to changes in auth architecture
+
+## TODO
 - Blacklist/Refresh Tokens
 - Input Sanitization
