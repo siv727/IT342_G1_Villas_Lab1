@@ -40,19 +40,19 @@
 - Input Field Component Functionality {8f48e959273c316036624cbf1ebed2264b6b0cf8}
 - Logout Button Functionality {5cbf863d5190fbda0f3481a656264a2363e4a9dc}
 - Profile Functionality {ece21cde27c6f83baa17086f32cd209ce8fbbaa9}
+- Login Activity layout {80792ccef0cd1dc57152c6a29697e6310ad3a6e2}
+- Profile Activity layout {d2f1435edef53b80e9c98af5fa5c949aceaa8998}
+- Profile Update Activity layout {d56f5fe68269a47b8f4609a784fb761ffd4801b1}
+- Register Activity layout {c2dcf2c68a2bb716cdf0a5f1cb95d05f4a39f3ca}
 
 ## IN-PROGRESS
-- Login Activity layout
-- Profile Activity layout
-- Profile Update Activity layout
-- Register Activity layout
-- Update Docs in regards to changes in auth architecture
-
-## TODO
 - Login Request dto
 - Login Response dto
 - Registration Request dto
 - User Response dto
+- Update Docs in regards to changes in auth architecture
+
+## TODO
 - Token Manager
 - RetroFit Client
 - Authentication Services
