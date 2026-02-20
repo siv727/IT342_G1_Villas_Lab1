@@ -37,11 +37,11 @@
 - Make input field component layout {e46198888153caad9828cf8d9239db78691509b8}
 - Make logout button component layout {64cf24e4622d01a1f6ae7ff89cbc2918435417eb}
 - Make profile display field component layout {a88e61d2f4383a8923b590a8540f7cc12cea6f7d}
+- Input Field Component Functionality {8f48e959273c316036624cbf1ebed2264b6b0cf8}
+- Logout Button Functionality {5cbf863d5190fbda0f3481a656264a2363e4a9dc}
+- Profile Functionality {ece21cde27c6f83baa17086f32cd209ce8fbbaa9}
 
 ## IN-PROGRESS
-- Input Field Component Functionality
-- Logout Button Functionality
-- Profile Functionality
 - Login Activity layout
 - Profile Activity layout
 - Profile Update Activity layout
