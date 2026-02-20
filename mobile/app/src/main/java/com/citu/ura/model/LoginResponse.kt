@@ -1,0 +1,5 @@
+package com.citu.ura.model
+
+data class LoginResponse(
+    val token: String
+)
