@@ -56,12 +56,11 @@
 - Profile Activity {744af84c8108ef10f97786555a90a04c7b191a4c}
 - Profile Update Activity {85c59f76f106df2932af27fe9680306662f7121a}
 - Register Activity {d5e913527e472424ebebce29caca429eacfc5fe2}
+- Exception & Error Message Handling {cc2a7f501e9535ea1da7f0ccf8b16fe752745f50}
 
 ## IN-PROGRESS
-- Exception Handling
-- Error Message Handling
 - Update Docs in regards to changes in auth architecture
-
-## TODO
 - Blacklist/Refresh Tokens
 - Input Sanitization
+
+## TODO
