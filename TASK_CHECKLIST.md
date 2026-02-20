@@ -33,10 +33,33 @@
 - Create Profile Display page {e983aa03bd96dcef3eaa188f8cf49951888632ca}
 - Create Profile Update page {3776d82534e8e0f80b2aac857afa2a3441ee2305}
 - Setup routing (login, register, profile, profile update) {bbcd684f43b62f536c4a4c185ef9af8878755fac}
+- Make custom mobile icons {f601d148c25ad0703bfa5bf518b4b35ffecf6bf0}
 
 ## IN-PROGRESS
+- Make input field component layout
+- Make logout button component layout
+- Make profile display field component layout
 - Update Docs in regards to changes in auth architecture
 
 ## TODO
+- Login Activity layout
+- Profile Activity layout
+- Profile Update Activity layout
+- Register Activity layout
+- Input Field Component Functionality
+- Logout Button Functionality
+- Profile Functionality
+- Login Request dto
+- Login Response dto
+- Registration Request dto
+- User Response dto
+- Token Manager
+- RetroFit Client
+- Authentication Services
+- Api Endpoints
+- Login Activity
+- Profile Activity
+- Profile Update Activity
+- Register Activity
 - Blacklist/Refresh Tokens
 - Input Sanitization
