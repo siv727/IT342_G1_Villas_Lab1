@@ -42,10 +42,10 @@
 - Login Activity layout
 - Profile Activity layout
 - Profile Update Activity layout
+- Register Activity layout
 - Update Docs in regards to changes in auth architecture
 
 ## TODO
-- Register Activity layout
 - Input Field Component Functionality
 - Logout Button Functionality
 - Profile Functionality
