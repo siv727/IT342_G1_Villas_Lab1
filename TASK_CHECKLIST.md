@@ -39,13 +39,12 @@
 - Make profile display field component layout {a88e61d2f4383a8923b590a8540f7cc12cea6f7d}
 
 ## IN-PROGRESS
-
-- Update Docs in regards to changes in auth architecture
-
-## TODO
 - Login Activity layout
 - Profile Activity layout
 - Profile Update Activity layout
+- Update Docs in regards to changes in auth architecture
+
+## TODO
 - Register Activity layout
 - Input Field Component Functionality
 - Logout Button Functionality
