@@ -1,46 +1,31 @@
 package com.citu.ura
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.citu.ura.ui.theme.UraTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.citu.ura.activities.LoginActivity
+import com.citu.ura.activities.ProfileActivity
+import com.citu.ura.network.TokenManager
 
-class MainActivity : ComponentActivity() {
+/**
+ * Initializes TokenManager and routes to Login or Profile based on auth state.
+ */
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            UraTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+
+        // Initialize TokenManager with application context
+        TokenManager.init(applicationContext)
+
+        // Route based on auth state (equivalent to React Router's protected routes)
+        val intent = if (TokenManager.isLoggedIn()) {
+            Intent(this, ProfileActivity::class.java)
+        } else {
+            Intent(this, LoginActivity::class.java)
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    UraTheme {
-        Greeting("Android")
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

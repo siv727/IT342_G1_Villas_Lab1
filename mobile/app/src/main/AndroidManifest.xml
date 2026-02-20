@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Internet permission for Retrofit network calls -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ura"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <!-- Entry point – routes to Login or Profile -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,10 +25,39 @@
             android:theme="@style/Theme.Ura">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Login screen -->
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false"
+            android:label="Login"
+            android:theme="@style/Theme.Ura" />
+
+        <!-- Register screen -->
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false"
+            android:label="Register"
+            android:theme="@style/Theme.Ura" />
+
+        <!-- Profile view screen -->
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false"
+            android:label="Profile"
+            android:theme="@style/Theme.Ura" />
+
+        <!-- Profile update screen -->
+        <activity
+            android:name=".activities.ProfileUpdateActivity"
+            android:exported="false"
+            android:label="Update Profile"
+            android:theme="@style/Theme.Ura" />
+
     </application>
+
 
 </manifest>
