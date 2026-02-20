@@ -19,6 +19,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.io.IOException
 
 /**
  * ProfileUpdateActivity – equivalent to ProfileUpdatePage.jsx in the web frontend.
@@ -118,15 +123,30 @@ class ProfileUpdateActivity : AppCompatActivity() {
                         formContent.visibility = View.VISIBLE
                     }
                 } else {
-                    if (response.code() == 401) {
-                        TokenManager.clearAll()
-                        navigateToLogin()
-                    } else {
-                        showError("Failed to load profile.")
+                    when (response.code()) {
+                        401 -> {
+                            TokenManager.clearAll()
+                            navigateToLogin()
+                        }
+                        403 -> showError("Access denied. Please login again.")
+                        404 -> showError("Profile not found. Please login again.")
+                        in 500..599 -> showError("Server error. Please try again later.")
+                        else -> {
+                            val errorBody = response.errorBody()?.string()
+                            showError(parseErrorBody(errorBody) ?: "Failed to load profile.")
+                        }
                     }
                 }
+            } catch (e: SocketTimeoutException) {
+                showError("Connection timed out. Please check your internet and try again.")
+            } catch (e: UnknownHostException) {
+                showError("Unable to reach the server. Please check your internet connection.")
+            } catch (e: ConnectException) {
+                showError("Unable to connect to the server. Please try again later.")
+            } catch (e: IOException) {
+                showError("A network error occurred. Please check your connection and try again.")
             } catch (e: Exception) {
-                showError("Network error: ${e.message}")
+                showError("An unexpected error occurred. Please try again.")
             } finally {
                 progressBar.visibility = View.GONE
             }
@@ -167,10 +187,31 @@ class ProfileUpdateActivity : AppCompatActivity() {
                     updateInitials(firstname, lastname)
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    showError(errorBody ?: "Failed to update profile.")
+                    val message = when (response.code()) {
+                        400 -> parseErrorBody(errorBody) ?: "Invalid input. Please check your details."
+                        401 -> {
+                            TokenManager.clearAll()
+                            navigateToLogin()
+                            return@launch
+                        }
+                        403 -> "Access denied. Please login again."
+                        409 -> parseErrorBody(errorBody) ?: "This email is already in use."
+                        422 -> parseErrorBody(errorBody) ?: "Please check your input and try again."
+                        in 500..599 -> "Server error. Please try again later."
+                        else -> parseErrorBody(errorBody) ?: "Failed to update profile."
+                    }
+                    showError(message)
                 }
+            } catch (e: SocketTimeoutException) {
+                showError("Connection timed out. Please check your internet and try again.")
+            } catch (e: UnknownHostException) {
+                showError("Unable to reach the server. Please check your internet connection.")
+            } catch (e: ConnectException) {
+                showError("Unable to connect to the server. Please try again later.")
+            } catch (e: IOException) {
+                showError("A network error occurred. Please check your connection and try again.")
             } catch (e: Exception) {
-                showError("Network error: ${e.message}")
+                showError("An unexpected error occurred. Please try again.")
             } finally {
                 setSaving(false)
             }
@@ -229,5 +270,22 @@ class ProfileUpdateActivity : AppCompatActivity() {
 
     private fun hideSuccess() {
         tvSuccess.visibility = View.GONE
+    }
+
+    /**
+     * Parse the error body from the server response.
+     * Tries to extract a "message" or "error" field from JSON, falls back to plain text.
+     */
+    private fun parseErrorBody(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) return null
+        return try {
+            val json = JSONObject(errorBody)
+            json.optString("message", null)
+                ?: json.optString("error", null)
+                ?: errorBody.take(200)
+        } catch (e: Exception) {
+            // Not JSON – return plain text (trimmed)
+            errorBody.take(200)
+        }
     }
 }

@@ -16,6 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
+import java.io.IOException
 
 /**
  * RegisterActivity – equivalent to RegisterPage.jsx in the web frontend.
@@ -99,10 +104,25 @@ class RegisterActivity : AppCompatActivity() {
                     finish()
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    showError(errorBody ?: "Registration failed. Please try again.")
+                    val message = when (response.code()) {
+                        400 -> parseErrorBody(errorBody) ?: "Invalid input. Please check your details."
+                        409 -> parseErrorBody(errorBody) ?: "An account with this email already exists."
+                        422 -> parseErrorBody(errorBody) ?: "Please check your input and try again."
+                        in 500..599 -> "Server error. Please try again later."
+                        else -> parseErrorBody(errorBody) ?: "Registration failed. Please try again."
+                    }
+                    showError(message)
                 }
+            } catch (e: SocketTimeoutException) {
+                showError("Connection timed out. Please check your internet and try again.")
+            } catch (e: UnknownHostException) {
+                showError("Unable to reach the server. Please check your internet connection.")
+            } catch (e: ConnectException) {
+                showError("Unable to connect to the server. Please try again later.")
+            } catch (e: IOException) {
+                showError("A network error occurred. Please check your connection and try again.")
             } catch (e: Exception) {
-                showError("Network error: ${e.message}")
+                showError("An unexpected error occurred. Please try again.")
             } finally {
                 setLoading(false)
             }
@@ -141,5 +161,22 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun hideError() {
         tvError.visibility = View.GONE
+    }
+
+    /**
+     * Parse the error body from the server response.
+     * Tries to extract a "message" or "error" field from JSON, falls back to plain text.
+     */
+    private fun parseErrorBody(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) return null
+        return try {
+            val json = JSONObject(errorBody)
+            json.optString("message", null)
+                ?: json.optString("error", null)
+                ?: errorBody.take(200)
+        } catch (e: Exception) {
+            // Not JSON – return plain text (trimmed)
+            errorBody.take(200)
+        }
     }
 }
