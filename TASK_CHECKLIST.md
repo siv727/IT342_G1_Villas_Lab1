@@ -34,11 +34,12 @@
 - Create Profile Update page {3776d82534e8e0f80b2aac857afa2a3441ee2305}
 - Setup routing (login, register, profile, profile update) {bbcd684f43b62f536c4a4c185ef9af8878755fac}
 - Make custom mobile icons {f601d148c25ad0703bfa5bf518b4b35ffecf6bf0}
+- Make input field component layout {e46198888153caad9828cf8d9239db78691509b8}
+- Make logout button component layout {64cf24e4622d01a1f6ae7ff89cbc2918435417eb}
+- Make profile display field component layout {a88e61d2f4383a8923b590a8540f7cc12cea6f7d}
 
 ## IN-PROGRESS
-- Make input field component layout
-- Make logout button component layout
-- Make profile display field component layout
+
 - Update Docs in regards to changes in auth architecture
 
 ## TODO
