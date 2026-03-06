@@ -5,10 +5,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.dto.LoginRequest;
-import com.example.backend.dto.LoginResponse;
 import com.example.backend.dto.RegistrationRequest;
+import com.example.backend.entity.RefreshToken;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
+
+import java.time.Instant;
 
 @Service
 public class AuthService {
@@ -16,13 +18,26 @@ public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    public AuthService(UserRepository userRepository, JwtService jwtService) {
+    public AuthService(UserRepository userRepository, JwtService jwtService,
+                       RefreshTokenService refreshTokenService, TokenBlacklistService tokenBlacklistService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
-    public LoginResponse register(RegistrationRequest request) {
+    public JwtService getJwtService() {
+        return jwtService;
+    }
+
+    public RefreshTokenService getRefreshTokenService() {
+        return refreshTokenService;
+    }
+
+    public User registerUser(RegistrationRequest request) {
         if (userRepository.existsByEmail(request.email())) {
             throw new IllegalArgumentException("Email already in use");
         }
@@ -33,12 +48,10 @@ public class AuthService {
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
 
-        userRepository.save(user);
-
-        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
+        return userRepository.save(user);
     }
 
-    public LoginResponse login(LoginRequest request) {
+    public User authenticate(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
@@ -46,11 +59,26 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
+        return user;
     }
 
-    public void logout() {
-        // For JWT-based stateless authentication, logout can be handled on the client side by simply deleting the token.
-        // Optionally, you could implement token blacklisting here if you want to invalidate tokens server-side.
+    public User verifyRefreshToken(String refreshTokenStr) {
+        RefreshToken refreshToken = refreshTokenService.findByToken(refreshTokenStr)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid refresh token"));
+
+        refreshToken = refreshTokenService.verifyExpiration(refreshToken);
+        return refreshToken.getUser();
+    }
+
+    public void logout(String accessToken) {
+        // Blacklist the access token so it can't be reused
+        Instant expiry = jwtService.extractExpiration(accessToken).toInstant();
+        tokenBlacklistService.blacklistToken(accessToken, expiry);
+
+        // Delete the user's refresh tokens
+        String email = jwtService.extractEmail(accessToken);
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        refreshTokenService.deleteByUser(user);
     }
 }
