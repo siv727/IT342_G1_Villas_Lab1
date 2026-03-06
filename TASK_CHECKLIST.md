@@ -76,13 +76,14 @@
 - Update LogoutButton to async server-side logout {fb153d8204d65a9d95d93ff27fbbde05b31448da}
 - Remove token and disable email input on ProfileUpdatePage {37e6cdc07b07b7c5bc27de389a633b43dec34c4e}
 - Add password rules {0eb324c3ae642805791604e9b72a02996a7598da}
-
-## IN-PROGRESS
 - Adding Input Sanitizer {fb437f9163a91c30b577dbca2e5fb499c8b6a91b}
 - Implementing input sanitization in Authentication server side {598834dbdb3545bef93fcee6a9702bc5ba79717f}
 - Implementing input sanitization in Profile Update server side {65d1048a8709e509eb460662835b59649d0877bb}
 - Implementing input sanitization in Authentication client side {784e760d44cfe131dda1d8d04fd4621177577692}
 - Implementing input sanitization in Profile Update client side {3542bcdc586efb4cf3e98e4de3339741c9154b2a}
+
+## IN-PROGRESS
+
 
 ## TODO
 - Update Docs in regards to changes in auth architecture
