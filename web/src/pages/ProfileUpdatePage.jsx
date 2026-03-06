@@ -19,11 +19,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
  *
  * Props
  * -----
- * @param {string|null} token
  * @param {string|null} userId
  * @param {() => void}  onLogout
  */
-export default function ProfileUpdatePage({ token, userId, onLogout }) {
+export default function ProfileUpdatePage({ userId, onLogout }) {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -36,7 +35,7 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token || !userId) {
+    if (!userId) {
       navigate("/login");
       return;
     }
@@ -57,7 +56,7 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
     };
 
     fetchProfile();
-  }, [token, userId, navigate]);
+  }, [userId, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -170,7 +169,7 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
                 name="email"
                 type="email"
                 value={formData.email}
-                onChange={handleChange}
+                disabled
               />
             </div>
           </CardContent>
