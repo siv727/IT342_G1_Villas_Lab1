@@ -57,22 +57,22 @@
 - Profile Update Activity {85c59f76f106df2932af27fe9680306662f7121a}
 - Register Activity {d5e913527e472424ebebce29caca429eacfc5fe2}
 - Exception & Error Message Handling {cc2a7f501e9535ea1da7f0ccf8b16fe752745f50}
+- Add BlacklistedToken Entity {7fde7f5f2e25c0f762710c4599c853f3a4b24741}
+- Add RefreshToken Entity {3e7e929d39eed84cebb04bd56890e97524b0425d}
+- Add BlacklistedToken Repository {85a01571ad8e8c0db876b56ad985f51cac7ed2b5}
+- Add RefreshToken Repository {71b4dd772102cb02d8f5aca823004e237aaf2e3e}
+- Add TokenBlacklistService {39e314e47c3fd9b2866ef1f5c759e5de771c5d17}
+- Add RefreshTokenService {09e6868a4da42da873feb166e92b7b3631996dd3}
+- Add RefreshTokenRequest DTO {34f831184fbfca499833281326591d12f5313ad7}
 
 ## IN-PROGRESS
-- Add BlacklistedToken Entity
-- Add RefreshToken Entity
-- Add BlacklistedToken Repository
-- Add RefreshToken Repository
-- Add TokenBlacklistService
-- Add RefreshTokenService
-- Add RefreshTokenRequest DTO
+- Blacklist token and Refresh token {}
+- Refactor LoginResponse DTO for cookie auth {}
+- Refactor AuthService with blacklist, refresh, and cookie auth {}
+- Update JwtFilter to read from cookies and check blacklist {}
+- Refactor AuthController with HttpOnly cookie handling {}
 
 ## TODO
-- Blacklist token and Refresh token
-- Refactor LoginResponse DTO for cookie auth
-- Refactor AuthService with blacklist, refresh, and cookie auth
-- Update JwtFilter to read from cookies and check blacklist
-- Refactor AuthController with HttpOnly cookie handling
 - Update Axios client for cookie-based auth with refresh interceptor
 - Update auth API for cookie-based response
 - Update LoginPage for cookie auth flow
