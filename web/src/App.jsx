@@ -7,16 +7,13 @@ import ProfilePage from "@/pages/ProfilePage";
 import ProfileUpdatePage from "@/pages/ProfileUpdatePage";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
 
-  const handleLogin = (newToken, newUserId) => {
-    setToken(newToken);
+  const handleLogin = (newUserId) => {
     setUserId(newUserId);
   };
 
   const handleLogout = () => {
-    setToken(null);
     setUserId(null);
   };
 
@@ -31,7 +28,6 @@ function App() {
         path="/profile"
         element={
           <ProfilePage
-            token={token}
             userId={userId}
             onLogout={handleLogout}
           />
@@ -41,7 +37,6 @@ function App() {
         path="/profile/update"
         element={
           <ProfileUpdatePage
-            token={token}
             userId={userId}
             onLogout={handleLogout}
           />
