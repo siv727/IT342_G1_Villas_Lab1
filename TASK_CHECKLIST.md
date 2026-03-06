@@ -75,6 +75,7 @@
 - Remove token from client side {1df924075af8e5554753a6459e91c6918743c0a4}
 - Update LogoutButton to async server-side logout {fb153d8204d65a9d95d93ff27fbbde05b31448da}
 - Remove token and disable email input on ProfileUpdatePage {37e6cdc07b07b7c5bc27de389a633b43dec34c4e}
+- Add password rules {0eb324c3ae642805791604e9b72a02996a7598da}
 
 ## IN-PROGRESS
 
