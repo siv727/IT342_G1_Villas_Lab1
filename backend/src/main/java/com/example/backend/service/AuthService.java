@@ -11,6 +11,9 @@ import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class AuthService {
@@ -42,6 +45,8 @@ public class AuthService {
             throw new IllegalArgumentException("Email already in use");
         }
 
+        validatePassword(request.password());
+
         User user = new User();
         user.setFirstname(request.firstname());
         user.setLastname(request.lastname());
@@ -49,6 +54,35 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.password()));
 
         return userRepository.save(user);
+    }
+
+    private void validatePassword(String password) {
+        List<String> errors = new ArrayList<>();
+
+        if (password == null || password.length() < 8) {
+            errors.add("at least 8 characters");
+        }
+        if (!Pattern.compile("[A-Z]").matcher(password != null ? password : "").find()) {
+            errors.add("one uppercase letter");
+        }
+        if (!Pattern.compile("[a-z]").matcher(password != null ? password : "").find()) {
+            errors.add("one lowercase letter");
+        }
+        if (!Pattern.compile("[0-9]").matcher(password != null ? password : "").find()) {
+            errors.add("one digit");
+        }
+        if (!Pattern.compile("[^a-zA-Z0-9]").matcher(password != null ? password : "").find()) {
+            errors.add("one special character");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException(
+                "Password does not meet the required criteria. It must have "
+                + String.join(", ", errors.subList(0, errors.size() - 1))
+                + (errors.size() > 1 ? ", and " + errors.get(errors.size() - 1) : errors.get(0))
+                + "."
+            );
+        }
     }
 
     public User authenticate(LoginRequest request) {
