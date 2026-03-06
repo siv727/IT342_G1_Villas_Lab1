@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "@/components/AuthForm";
 import { loginUser } from "@/api/authApi";
-import { getUserIdFromToken } from "@/lib/auth";
 
 /**
  * LoginPage
  *
  * Props
  * -----
- * @param {(token: string, userId: string) => void} onLogin
+ * @param {(userId: string) => void} onLogin
  */
 export default function LoginPage({ onLogin }) {
   const [loading, setLoading] = useState(false);
@@ -18,19 +17,18 @@ export default function LoginPage({ onLogin }) {
   const handleLogin = async (formData) => {
     setLoading(true);
     try {
-      const token = await loginUser({
+      const data = await loginUser({
         email: formData.email,
         password: formData.password,
       });
 
-      // Decode userId from the JWT token
-      const userId = getUserIdFromToken(token);
+      // Tokens are stored as HttpOnly cookies by the server
+      // Only userId is returned in the response body
+      const userId = data.userId;
 
-      // Persist token & userId
-      localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
 
-      if (onLogin) onLogin(token, userId);
+      if (onLogin) onLogin(userId);
 
       navigate("/profile");
     } finally {

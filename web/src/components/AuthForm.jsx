@@ -38,8 +38,28 @@ export default function AuthForm({ mode, onSubmit, loading }) {
 
   const [error, setError] = useState("");
 
+  // Sanitize: strip HTML tags and trim
+  const sanitize = (str) => str.replace(/<[^>]*>/g, "").trim();
+
+  // Name validation: letters, spaces, hyphens, apostrophes, periods
+  const isValidName = (name) => /^[\p{L} .'-]+$/u.test(name);
+
+  // Password rules for registration
+  const passwordRules = !isLogin
+    ? [
+        { label: "At least 8 characters", test: (pw) => pw.length >= 8 },
+        { label: "One uppercase letter", test: (pw) => /[A-Z]/.test(pw) },
+        { label: "One lowercase letter", test: (pw) => /[a-z]/.test(pw) },
+        { label: "One digit", test: (pw) => /[0-9]/.test(pw) },
+        { label: "One special character", test: (pw) => /[^a-zA-Z0-9]/.test(pw) },
+      ]
+    : [];
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // Don't sanitize password fields (special chars are valid)
+    const sanitized = name === "password" || name === "confirmPassword" ? value : sanitize(value);
+    setFormData({ ...formData, [name]: sanitized });
     setError("");
   };
 
@@ -52,9 +72,45 @@ export default function AuthForm({ mode, onSubmit, loading }) {
       }
     }
 
-    // Registration-specific: passwords must match
-    if (!isLogin && formData.password !== formData.confirmPassword) {
-      return "Password and Confirm Password do not match.";
+    // Name validation (register only)
+    if (!isLogin) {
+      if (!isValidName(formData.firstname)) {
+        return "First name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+      }
+      if (formData.firstname.length > 50) {
+        return "First name must be 50 characters or fewer.";
+      }
+      if (!isValidName(formData.lastname)) {
+        return "Last name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+      }
+      if (formData.lastname.length > 50) {
+        return "Last name must be 50 characters or fewer.";
+      }
+    }
+
+    // Email validation
+    if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(formData.email)) {
+      return "Please provide a valid email address.";
+    }
+    if (formData.email.length > 100) {
+      return "Email must be 100 characters or fewer.";
+    }
+
+    // Registration-specific: password rules
+    if (!isLogin) {
+      const failedRules = passwordRules.filter((rule) => !rule.test(formData.password));
+      if (failedRules.length > 0) {
+        const labels = failedRules.map((r) => r.label.toLowerCase());
+        const list =
+          labels.length === 1
+            ? labels[0]
+            : labels.slice(0, -1).join(", ") + ", and " + labels[labels.length - 1];
+        return `Password does not meet the required criteria. It must have ${list}.`;
+      }
+
+      if (formData.password !== formData.confirmPassword) {
+        return "Password and Confirm Password do not match.";
+      }
     }
 
     return null;
@@ -150,6 +206,22 @@ export default function AuthForm({ mode, onSubmit, loading }) {
               value={formData.password}
               onChange={handleChange}
             />
+            {/* Password rules checklist (register only, shown once user starts typing) */}
+            {!isLogin && formData.password.length > 0 && (
+              <ul className="mt-1 space-y-0.5 text-xs">
+                {passwordRules.map((rule) => {
+                  const passed = rule.test(formData.password);
+                  return (
+                    <li
+                      key={rule.label}
+                      className={passed ? "text-green-600" : "text-orange-500"}
+                    >
+                      {passed ? "✓" : "○"} {rule.label}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           {!isLogin && (

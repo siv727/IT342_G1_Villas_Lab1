@@ -5,10 +5,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.dto.LoginRequest;
-import com.example.backend.dto.LoginResponse;
 import com.example.backend.dto.RegistrationRequest;
+import com.example.backend.entity.RefreshToken;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
+
+import com.example.backend.util.InputSanitizer;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class AuthService {
@@ -16,29 +23,76 @@ public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    public AuthService(UserRepository userRepository, JwtService jwtService) {
+    public AuthService(UserRepository userRepository, JwtService jwtService,
+                       RefreshTokenService refreshTokenService, TokenBlacklistService tokenBlacklistService) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
-    public LoginResponse register(RegistrationRequest request) {
-        if (userRepository.existsByEmail(request.email())) {
+    public JwtService getJwtService() {
+        return jwtService;
+    }
+
+    public RefreshTokenService getRefreshTokenService() {
+        return refreshTokenService;
+    }
+
+    public User registerUser(RegistrationRequest request) {
+        // Sanitize and validate all inputs
+        String firstname = InputSanitizer.sanitizeName(request.firstname(), "First name");
+        String lastname = InputSanitizer.sanitizeName(request.lastname(), "Last name");
+        String email = InputSanitizer.sanitizeEmail(request.email());
+
+        if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("Email already in use");
         }
 
+        validatePassword(request.password());
+
         User user = new User();
-        user.setFirstname(request.firstname());
-        user.setLastname(request.lastname());
-        user.setEmail(request.email());
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(request.password()));
 
-        userRepository.save(user);
-
-        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
+        return userRepository.save(user);
     }
 
-    public LoginResponse login(LoginRequest request) {
+    private void validatePassword(String password) {
+        List<String> errors = new ArrayList<>();
+
+        if (password == null || password.length() < 8) {
+            errors.add("at least 8 characters");
+        }
+        if (!Pattern.compile("[A-Z]").matcher(password != null ? password : "").find()) {
+            errors.add("one uppercase letter");
+        }
+        if (!Pattern.compile("[a-z]").matcher(password != null ? password : "").find()) {
+            errors.add("one lowercase letter");
+        }
+        if (!Pattern.compile("[0-9]").matcher(password != null ? password : "").find()) {
+            errors.add("one digit");
+        }
+        if (!Pattern.compile("[^a-zA-Z0-9]").matcher(password != null ? password : "").find()) {
+            errors.add("one special character");
+        }
+
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException(
+                "Password does not meet the required criteria. It must have "
+                + String.join(", ", errors.subList(0, errors.size() - 1))
+                + (errors.size() > 1 ? ", and " + errors.get(errors.size() - 1) : errors.get(0))
+                + "."
+            );
+        }
+    }
+
+    public User authenticate(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
@@ -46,11 +100,26 @@ public class AuthService {
             throw new IllegalArgumentException("Invalid email or password");
         }
 
-        return new LoginResponse(jwtService.generateToken(user.getEmail(), user.getId()));
+        return user;
     }
 
-    public void logout() {
-        // For JWT-based stateless authentication, logout can be handled on the client side by simply deleting the token.
-        // Optionally, you could implement token blacklisting here if you want to invalidate tokens server-side.
+    public User verifyRefreshToken(String refreshTokenStr) {
+        RefreshToken refreshToken = refreshTokenService.findByToken(refreshTokenStr)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid refresh token"));
+
+        refreshToken = refreshTokenService.verifyExpiration(refreshToken);
+        return refreshToken.getUser();
+    }
+
+    public void logout(String accessToken) {
+        // Blacklist the access token so it can't be reused
+        Instant expiry = jwtService.extractExpiration(accessToken).toInstant();
+        tokenBlacklistService.blacklistToken(accessToken, expiry);
+
+        // Delete the user's refresh tokens
+        String email = jwtService.extractEmail(accessToken);
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        refreshTokenService.deleteByUser(user);
     }
 }

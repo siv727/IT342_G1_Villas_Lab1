@@ -57,10 +57,33 @@
 - Profile Update Activity {85c59f76f106df2932af27fe9680306662f7121a}
 - Register Activity {d5e913527e472424ebebce29caca429eacfc5fe2}
 - Exception & Error Message Handling {cc2a7f501e9535ea1da7f0ccf8b16fe752745f50}
+- Add BlacklistedToken Entity {7fde7f5f2e25c0f762710c4599c853f3a4b24741}
+- Add RefreshToken Entity {3e7e929d39eed84cebb04bd56890e97524b0425d}
+- Add BlacklistedToken Repository {85a01571ad8e8c0db876b56ad985f51cac7ed2b5}
+- Add RefreshToken Repository {71b4dd772102cb02d8f5aca823004e237aaf2e3e}
+- Add TokenBlacklistService {39e314e47c3fd9b2866ef1f5c759e5de771c5d17}
+- Add RefreshTokenService {09e6868a4da42da873feb166e92b7b3631996dd3}
+- Add RefreshTokenRequest DTO {34f831184fbfca499833281326591d12f5313ad7}
+- Blacklist token and Refresh token {87848642f2e6e844030461c4bf4aa4a68d0a702e}
+- Refactor LoginResponse DTO for cookie auth {6bc74bbbfe76ab8c052a77f0851ee4ecc0150e41}
+- Refactor AuthService with blacklist, refresh, and cookie auth {d4dc0437947d73f3e9d1cf26f570b52904d2e13a}
+- Update JwtFilter to read from cookies and check blacklist {0916b3d078f2fe24a1895b36dfa2ad36aca78d3a}
+- Refactor AuthController with HttpOnly cookie handling {a4a8d7a1e738b5703e2234671c6e9270e9bd3ec4}
+- Update Axios client for cookie-based auth with refresh interceptor {af73ae2cd072a81ec6b2bedb970867c6a79b1358}
+- Update auth API for cookie-based response {e6df3ecf05444321205304f36752b6c60b0e101c}
+- Update LoginPage for cookie auth flow {5fc0fd5d0dffe1aa188877dd6d6cdac3248df6ec}
+- Remove token from client side {1df924075af8e5554753a6459e91c6918743c0a4}
+- Update LogoutButton to async server-side logout {fb153d8204d65a9d95d93ff27fbbde05b31448da}
+- Remove token and disable email input on ProfileUpdatePage {37e6cdc07b07b7c5bc27de389a633b43dec34c4e}
+- Add password rules {0eb324c3ae642805791604e9b72a02996a7598da}
+- Adding Input Sanitizer {fb437f9163a91c30b577dbca2e5fb499c8b6a91b}
+- Implementing input sanitization in Authentication server side {598834dbdb3545bef93fcee6a9702bc5ba79717f}
+- Implementing input sanitization in Profile Update server side {65d1048a8709e509eb460662835b59649d0877bb}
+- Implementing input sanitization in Authentication client side {784e760d44cfe131dda1d8d04fd4621177577692}
+- Implementing input sanitization in Profile Update client side {3542bcdc586efb4cf3e98e4de3339741c9154b2a}
 
 ## IN-PROGRESS
-- Update Docs in regards to changes in auth architecture
-- Blacklist/Refresh Tokens
-- Input Sanitization
+
 
 ## TODO
+- Update Docs in regards to changes in auth architecture

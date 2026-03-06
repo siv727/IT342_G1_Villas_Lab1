@@ -19,11 +19,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
  *
  * Props
  * -----
- * @param {string|null} token
  * @param {string|null} userId
  * @param {() => void}  onLogout
  */
-export default function ProfileUpdatePage({ token, userId, onLogout }) {
+export default function ProfileUpdatePage({ userId, onLogout }) {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -35,8 +34,14 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
+  // Sanitize: strip HTML tags and trim
+  const sanitize = (str) => str.replace(/<[^>]*>/g, "").trim();
+
+  // Name validation: letters, spaces, hyphens, apostrophes, periods
+  const isValidName = (name) => /^[\p{L} .'-]+$/u.test(name);
+
   useEffect(() => {
-    if (!token || !userId) {
+    if (!userId) {
       navigate("/login");
       return;
     }
@@ -57,10 +62,11 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
     };
 
     fetchProfile();
-  }, [token, userId, navigate]);
+  }, [userId, navigate]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: sanitize(value) });
     setError("");
     setSuccess("");
   };
@@ -72,6 +78,20 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
         return `${label} is required.`;
       }
     }
+
+    if (!isValidName(formData.firstname)) {
+      return "First name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+    }
+    if (formData.firstname.length > 50) {
+      return "First name must be 50 characters or fewer.";
+    }
+    if (!isValidName(formData.lastname)) {
+      return "Last name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+    }
+    if (formData.lastname.length > 50) {
+      return "Last name must be 50 characters or fewer.";
+    }
+
     return null;
   };
 
@@ -170,7 +190,7 @@ export default function ProfileUpdatePage({ token, userId, onLogout }) {
                 name="email"
                 type="email"
                 value={formData.email}
-                onChange={handleChange}
+                disabled
               />
             </div>
           </CardContent>
