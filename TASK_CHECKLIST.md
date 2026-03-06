@@ -64,13 +64,14 @@
 - Add TokenBlacklistService {39e314e47c3fd9b2866ef1f5c759e5de771c5d17}
 - Add RefreshTokenService {09e6868a4da42da873feb166e92b7b3631996dd3}
 - Add RefreshTokenRequest DTO {34f831184fbfca499833281326591d12f5313ad7}
+- Blacklist token and Refresh token {87848642f2e6e844030461c4bf4aa4a68d0a702e}
+- Refactor LoginResponse DTO for cookie auth {6bc74bbbfe76ab8c052a77f0851ee4ecc0150e41}
+- Refactor AuthService with blacklist, refresh, and cookie auth {d4dc0437947d73f3e9d1cf26f570b52904d2e13a}
+- Update JwtFilter to read from cookies and check blacklist {0916b3d078f2fe24a1895b36dfa2ad36aca78d3a}
+- Refactor AuthController with HttpOnly cookie handling {a4a8d7a1e738b5703e2234671c6e9270e9bd3ec4}
 
 ## IN-PROGRESS
-- Blacklist token and Refresh token {}
-- Refactor LoginResponse DTO for cookie auth {}
-- Refactor AuthService with blacklist, refresh, and cookie auth {}
-- Update JwtFilter to read from cookies and check blacklist {}
-- Refactor AuthController with HttpOnly cookie handling {}
+
 
 ## TODO
 - Update Axios client for cookie-based auth with refresh interceptor
