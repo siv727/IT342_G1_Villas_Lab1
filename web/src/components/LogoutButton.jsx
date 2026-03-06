@@ -13,8 +13,8 @@ import { LogOut } from "lucide-react";
 export default function LogoutButton({ onLogout }) {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logoutUser();
+  const handleLogout = async () => {
+    await logoutUser();
     if (onLogout) onLogout();
     navigate("/login");
   };
