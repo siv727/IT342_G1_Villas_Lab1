@@ -17,18 +17,17 @@ import { Pencil } from "lucide-react";
  *
  * Props
  * -----
- * @param {string|null} token
  * @param {string|null} userId
  * @param {() => void}  onLogout
  */
-export default function ProfilePage({ token, userId, onLogout }) {
+export default function ProfilePage({ userId, onLogout }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token || !userId) {
+    if (!userId) {
       navigate("/login");
       return;
     }
@@ -45,7 +44,7 @@ export default function ProfilePage({ token, userId, onLogout }) {
     };
 
     fetchProfile();
-  }, [token, userId, navigate]);
+  }, [userId, navigate]);
 
   if (loading) {
     return (
