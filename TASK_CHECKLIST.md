@@ -59,8 +59,25 @@
 - Exception & Error Message Handling {cc2a7f501e9535ea1da7f0ccf8b16fe752745f50}
 
 ## IN-PROGRESS
-- Update Docs in regards to changes in auth architecture
-- Blacklist/Refresh Tokens
-- Input Sanitization
+- Add BlacklistedToken Entity
+- Add RefreshToken Entity
+- Add BlacklistedToken Repository
+- Add RefreshToken Repository
+- Add TokenBlacklistService
+- Add RefreshTokenService
+- Add RefreshTokenRequest DTO
 
 ## TODO
+- Blacklist token and Refresh token
+- Refactor LoginResponse DTO for cookie auth
+- Refactor AuthService with blacklist, refresh, and cookie auth
+- Update JwtFilter to read from cookies and check blacklist
+- Refactor AuthController with HttpOnly cookie handling
+- Update Axios client for cookie-based auth with refresh interceptor
+- Update auth API for cookie-based response
+- Update LoginPage for cookie auth flow
+- Remove token from client side
+- Update LogoutButton to async server-side logout
+- Disable email input on ProfileUpdatePage
+- Update Docs in regards to changes in auth architecture
+- Input Sanitization
