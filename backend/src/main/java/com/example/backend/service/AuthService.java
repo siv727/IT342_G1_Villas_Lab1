@@ -10,6 +10,8 @@ import com.example.backend.entity.RefreshToken;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 
+import com.example.backend.util.InputSanitizer;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,16 +43,21 @@ public class AuthService {
     }
 
     public User registerUser(RegistrationRequest request) {
-        if (userRepository.existsByEmail(request.email())) {
+        // Sanitize and validate all inputs
+        String firstname = InputSanitizer.sanitizeName(request.firstname(), "First name");
+        String lastname = InputSanitizer.sanitizeName(request.lastname(), "Last name");
+        String email = InputSanitizer.sanitizeEmail(request.email());
+
+        if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("Email already in use");
         }
 
         validatePassword(request.password());
 
         User user = new User();
-        user.setFirstname(request.firstname());
-        user.setLastname(request.lastname());
-        user.setEmail(request.email());
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setEmail(email);
         user.setPassword(passwordEncoder.encode(request.password()));
 
         return userRepository.save(user);
