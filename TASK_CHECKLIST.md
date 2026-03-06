@@ -69,16 +69,16 @@
 - Refactor AuthService with blacklist, refresh, and cookie auth {d4dc0437947d73f3e9d1cf26f570b52904d2e13a}
 - Update JwtFilter to read from cookies and check blacklist {0916b3d078f2fe24a1895b36dfa2ad36aca78d3a}
 - Refactor AuthController with HttpOnly cookie handling {a4a8d7a1e738b5703e2234671c6e9270e9bd3ec4}
+- Update Axios client for cookie-based auth with refresh interceptor {af73ae2cd072a81ec6b2bedb970867c6a79b1358}
+- Update auth API for cookie-based response {e6df3ecf05444321205304f36752b6c60b0e101c}
+- Update LoginPage for cookie auth flow {5fc0fd5d0dffe1aa188877dd6d6cdac3248df6ec}
+- Remove token from client side {1df924075af8e5554753a6459e91c6918743c0a4}
+- Update LogoutButton to async server-side logout {fb153d8204d65a9d95d93ff27fbbde05b31448da}
+- Remove token and disable email input on ProfileUpdatePage {37e6cdc07b07b7c5bc27de389a633b43dec34c4e}
 
 ## IN-PROGRESS
 
 
 ## TODO
-- Update Axios client for cookie-based auth with refresh interceptor
-- Update auth API for cookie-based response
-- Update LoginPage for cookie auth flow
-- Remove token from client side
-- Update LogoutButton to async server-side logout
-- Disable email input on ProfileUpdatePage
 - Update Docs in regards to changes in auth architecture
 - Input Sanitization
