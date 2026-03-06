@@ -38,6 +38,12 @@ export default function AuthForm({ mode, onSubmit, loading }) {
 
   const [error, setError] = useState("");
 
+  // Sanitize: strip HTML tags and trim
+  const sanitize = (str) => str.replace(/<[^>]*>/g, "").trim();
+
+  // Name validation: letters, spaces, hyphens, apostrophes, periods
+  const isValidName = (name) => /^[\p{L} .'-]+$/u.test(name);
+
   // Password rules for registration
   const passwordRules = !isLogin
     ? [
@@ -50,7 +56,10 @@ export default function AuthForm({ mode, onSubmit, loading }) {
     : [];
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // Don't sanitize password fields (special chars are valid)
+    const sanitized = name === "password" || name === "confirmPassword" ? value : sanitize(value);
+    setFormData({ ...formData, [name]: sanitized });
     setError("");
   };
 
@@ -61,6 +70,30 @@ export default function AuthForm({ mode, onSubmit, loading }) {
         const label = key === "confirmPassword" ? "Confirm Password" : key.charAt(0).toUpperCase() + key.slice(1);
         return `${label} is required.`;
       }
+    }
+
+    // Name validation (register only)
+    if (!isLogin) {
+      if (!isValidName(formData.firstname)) {
+        return "First name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+      }
+      if (formData.firstname.length > 50) {
+        return "First name must be 50 characters or fewer.";
+      }
+      if (!isValidName(formData.lastname)) {
+        return "Last name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+      }
+      if (formData.lastname.length > 50) {
+        return "Last name must be 50 characters or fewer.";
+      }
+    }
+
+    // Email validation
+    if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(formData.email)) {
+      return "Please provide a valid email address.";
+    }
+    if (formData.email.length > 100) {
+      return "Email must be 100 characters or fewer.";
     }
 
     // Registration-specific: password rules
