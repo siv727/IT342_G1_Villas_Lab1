@@ -34,6 +34,12 @@ export default function ProfileUpdatePage({ userId, onLogout }) {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
 
+  // Sanitize: strip HTML tags and trim
+  const sanitize = (str) => str.replace(/<[^>]*>/g, "").trim();
+
+  // Name validation: letters, spaces, hyphens, apostrophes, periods
+  const isValidName = (name) => /^[\p{L} .'-]+$/u.test(name);
+
   useEffect(() => {
     if (!userId) {
       navigate("/login");
@@ -59,7 +65,8 @@ export default function ProfileUpdatePage({ userId, onLogout }) {
   }, [userId, navigate]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: sanitize(value) });
     setError("");
     setSuccess("");
   };
@@ -71,6 +78,20 @@ export default function ProfileUpdatePage({ userId, onLogout }) {
         return `${label} is required.`;
       }
     }
+
+    if (!isValidName(formData.firstname)) {
+      return "First name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+    }
+    if (formData.firstname.length > 50) {
+      return "First name must be 50 characters or fewer.";
+    }
+    if (!isValidName(formData.lastname)) {
+      return "Last name can only contain letters, spaces, hyphens, apostrophes, and periods.";
+    }
+    if (formData.lastname.length > 50) {
+      return "Last name must be 50 characters or fewer.";
+    }
+
     return null;
   };
 
